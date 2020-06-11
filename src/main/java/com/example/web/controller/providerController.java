@@ -1,7 +1,7 @@
 package com.example.web.controller;
 
 import com.example.repository.providerRepository;
-import com.example.web.domain.models.tb_provider;
+import com.example.web.domain.models.tb_fornecedor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -28,25 +28,25 @@ public class providerController {
     }
 
     @PostMapping
-    public tb_provider create(@RequestBody tb_provider tbFornecedores) {
+    public tb_fornecedor create(@RequestBody tb_fornecedor tbFornecedores) {
         return providerRepository.save(tbFornecedores);
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity upDate(@PathVariable("id") Integer id, @RequestBody tb_provider tbFornecedores) {
+    public ResponseEntity upDate(@PathVariable("id") Integer id, @RequestBody tb_fornecedor tbFornecedores) {
         return providerRepository.findById(id).map(record ->{
-            record.setName(tbFornecedores.getName());
-            record.setEIN(tbFornecedores.getEIN());
+            record.setNome(tbFornecedores.getNome());
+            record.setCnpj(tbFornecedores.getCnpj());
             record.setEmail(tbFornecedores.getEmail());
-            record.setPhone(tbFornecedores.getPhone());
-            record.setCelphone(tbFornecedores.getCelphone());
-            record.setAddress(tbFornecedores.getAddress());
-            record.setNumber(tbFornecedores.getNumber());
-            record.setComplement(tbFornecedores.getComplement());
-            record.setNeighborhood(tbFornecedores.getNeighborhood());
-            record.setCity(tbFornecedores.getCity());
-            record.setState(tbFornecedores.getState());
-            tb_provider upDated = providerRepository.save(record);
+            record.setTelefone(tbFornecedores.getTelefone());
+            record.setCelular(tbFornecedores.getCelular());
+            record.setEndereco(tbFornecedores.getEndereco());
+            record.setNumero(tbFornecedores.getNumero());
+            record.setComplemento(tbFornecedores.getComplemento());
+            record.setBairro(tbFornecedores.getBairro());
+            record.setCidade(tbFornecedores.getCidade());
+            record.setEstado(tbFornecedores.getEstado());
+            tb_fornecedor upDated = providerRepository.save(record);
             return ResponseEntity.ok().body(upDated);
         }).orElse(ResponseEntity.notFound().build());
     }

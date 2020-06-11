@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.repository.ClientRepository;
-import com.example.web.domain.models.tb_client;
+import com.example.web.domain.models.tb_cliente;
 
 @RequestMapping("/client")
 @RestController
@@ -36,26 +36,26 @@ public class ClientController {
 	}
 	
 	@PostMapping
-	public tb_client create(@RequestBody tb_client tbclientes) {
+	public tb_cliente create(@RequestBody tb_cliente tbclientes) {
 		return clientRepository.save(tbclientes);
 	}
 	
 	@PutMapping(value = "/{id}")
-	public ResponseEntity upDate(@PathVariable("id") Integer id, @RequestBody tb_client tbclientes) {
+	public ResponseEntity upDate(@PathVariable("id") Integer id, @RequestBody tb_cliente tbclientes) {
 		return clientRepository.findById(id).map(record ->{
-			record.setName(tbclientes.getName());
-			record.setSsh(tbclientes.getSsh());
+			record.setNome(tbclientes.getNome());
+			record.setCpf(tbclientes.getCpf());
 			record.setEmail(tbclientes.getEmail());
-			record.setPhone(tbclientes.getPhone());
-			record.setCelphone(tbclientes.getCelphone());
-			record.setZipcode(tbclientes.getZipcode());
-			record.setAddress(tbclientes.getAddress());
-			record.setNumber(tbclientes.getNumber());
-			record.setComplement(tbclientes.getComplement());
-			record.setNeighborhood(tbclientes.getNeighborhood());
-			record.setCity(tbclientes.getCity());
-			record.setState(tbclientes.getState());
-			tb_client upDated = clientRepository.save(record);
+			record.setTelefone(tbclientes.getTelefone());
+			record.setCelular(tbclientes.getCelular());
+			record.setCep(tbclientes.getCep());
+			record.setEndereco(tbclientes.getEndereco());
+			record.setNumero(tbclientes.getNumero());
+			record.setComplemento(tbclientes.getComplemento());
+			record.setBairro(tbclientes.getBairro());
+			record.setCidade(tbclientes.getCidade());
+			record.setEstado(tbclientes.getEstado());
+			tb_cliente upDated = clientRepository.save(record);
 			return ResponseEntity.ok().body(upDated);
 		}).orElse(ResponseEntity.notFound().build());
 	}
